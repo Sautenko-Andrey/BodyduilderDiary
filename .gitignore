@@ -1,0 +1,55 @@
+# General
+*.swp
+*.swo
+.DS_Store
+*.tmp
+
+# Qt Creator
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.creator.user
+*.creator.user.*
+*.creator.bak
+*.autosave
+
+# Qt specific
+*.moc
+*.obj
+*.o
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+*.qrc.dep
+*.qrc.dep.*
+
+# Build directories
+build*/
+debug*/
+release*/
+
+# SQLite specific
+*.db
+*.db-journal
+*.sqlite
+*.sqlite-journal
+
+# Miscellaneous
+*.log
+*.bak
+*.orig
+*.rej
+*.class
+
+# Windows specific
+Thumbs.db
+Desktop.ini
+
+# macOS specific
+.AppleDouble
+.LSOverride
+._*
+
