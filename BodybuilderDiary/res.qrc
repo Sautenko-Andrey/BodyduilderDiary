@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>add_customer.png</file>
+        <file>edit_customer.png</file>
+        <file>search_customer.png</file>
+    </qresource>
+</RCC>
