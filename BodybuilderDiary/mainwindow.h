@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 #include "adduser.h"
+#include "databasemanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -27,6 +28,8 @@ private:
 
     // Pointer on AddUser widget
     std::unique_ptr<AddUser> m_ptr_add_user{nullptr};
+
+    DataBaseManager &db_manager = DataBaseManager::getInstance();
 
 };
 #endif // MAINWINDOW_H

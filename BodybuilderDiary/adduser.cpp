@@ -25,7 +25,7 @@ AddUser::AddUser(QWidget *parent)
     ui->setupUi(this);
 
     // Prepare database manager
-    db_manager.prepare();
+    //db_manager.prepare();
 
     // Make all labels bold and with font 12
     // Using lambda-function
@@ -125,7 +125,9 @@ void AddUser::on_saveButton_clicked()
 
 
     // Save data into the databse
-    QSqlQuery query(db_manager.getDatabase());
+    //QSqlQuery query(db_manager.getDatabase());
+
+
 
 
     // Close the dialog window

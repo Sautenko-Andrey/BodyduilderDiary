@@ -22,14 +22,22 @@ public:
 
     QSqlDatabase& getDatabase();
 
+
 private:
     DataBaseManager(){}
 
     QSqlDatabase m_database;
 
-    inline static const QString m_path_to_db{
-        QDir::homePath() + "/BODYBUILDERS_DIARY/data.db"
+    inline static const QStringList m_query_msgs{
+
     };
+
+    inline static const QString m_path_to_db{
+        QDir::homePath() + "/BODYBUILDERS_DIARY_DATA/data.db"
+    };
+
+    bool createDB(const QString &db_path, const QStringList &query_msgs);
+
 };
 
 #endif // DATABASEMANAGER_H

@@ -3,12 +3,24 @@
 
 #include <QScreen>
 #include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Prepare database manager
+    if(!db_manager.prepare()){
+        QMessageBox::warning(this, "Databse error",
+                             "Couldn't set up the database.\nReload app.");
+        exit(1);
+    }
+
+
 }
 
 MainWindow::~MainWindow()
