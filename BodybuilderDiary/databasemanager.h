@@ -3,6 +3,9 @@
 
 #include <QSqlDatabase>
 #include <QDir>
+#include <QVariant>
+
+using PairType = std::pair<QString, QVariant>;
 
 class DataBaseManager
 {
@@ -22,22 +25,23 @@ public:
 
     QSqlDatabase& getDatabase();
 
+    bool writeData(const QString &query_msg);
+    bool writeData(const QString &query_msg,
+                   const QVector<PairType> &values);
 
 private:
+
     DataBaseManager(){}
 
+    bool createWorkFolder();
+
     QSqlDatabase m_database;
-
-    inline static const QStringList m_query_msgs{
-
-    };
 
     inline static const QString m_path_to_db{
         QDir::homePath() + "/BODYBUILDERS_DIARY_DATA/data.db"
     };
 
-    bool createDB(const QString &db_path, const QStringList &query_msgs);
-
 };
+
 
 #endif // DATABASEMANAGER_H

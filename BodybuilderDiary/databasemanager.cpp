@@ -1,9 +1,6 @@
 #include "databasemanager.h"
-#include <QSqlQuery>
-#include <QDir>
 #include <QFile>
-
-#include"query_messages.h"
+#include <QSqlQuery>
 
 
 DataBaseManager::~DataBaseManager()
@@ -18,10 +15,20 @@ DataBaseManager::~DataBaseManager()
 */
 bool DataBaseManager::prepare()
 {
-    bool result = createDB(m_path_to_db, query_msgs);
+    if(!createWorkFolder()){
+        return false;
+    }
 
-    return result ? true : false;
+    // Open the database
+    m_database = QSqlDatabase::addDatabase("QSQLITE","Connection");
+    m_database.setDatabaseName(m_path_to_db);
+
+    if(!m_database.open()){
+        return false;
+    }
+    return true;
 }
+
 
 QSqlDatabase &DataBaseManager::getDatabase()
 {
@@ -29,15 +36,45 @@ QSqlDatabase &DataBaseManager::getDatabase()
 }
 
 
-/*
-    Create a database from scratch if it doesn't exist
-    in the user's home path. Check if the directory exists;
-    if not, create it.
-*/
-bool DataBaseManager::createDB(const QString &db_path,
-                               const QStringList &query_msgs){
+bool DataBaseManager::writeData(const QString &query_msg)
+{
+    // Create a query
+    QSqlQuery query(getDatabase());
 
-    QDir dir = QFileInfo(db_path).absoluteDir();
+    if(query.exec(query_msg)){
+        return true;
+    }
+
+    return false;
+}
+
+bool DataBaseManager::writeData(const QString &query_msg,
+                                const QVector<PairType> &values)
+{
+    // Create a query
+    QSqlQuery query(getDatabase());
+
+    query.prepare(query_msg);
+
+    for(const auto &value : values){
+        query.bindValue(value.first, value.second);
+    }
+
+    if(query.exec()){
+        return true;
+    }
+
+    return false;
+}
+
+
+/*
+    Function creates a working directory
+    where the databse will be exist
+*/
+bool DataBaseManager::createWorkFolder(){
+
+    QDir dir = QFileInfo(m_path_to_db).absoluteDir();
 
     if(!dir.exists()){
         if(!dir.mkpath(".")){
@@ -45,26 +82,15 @@ bool DataBaseManager::createDB(const QString &db_path,
         }
     }
 
-    if(!QFile::exists(db_path)){
+    if(!QFile::exists(m_path_to_db)){
 
-        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        QFile databse_file(m_path_to_db);
 
-        db.setDatabaseName(db_path);
-
-        if(!db.open()){
+        if(!databse_file.open(QIODevice::WriteOnly)){
             return false;
         }
 
-        for(const auto &msg : query_msgs){
-            // Create the table
-            QSqlQuery query;
-
-            if(!query.exec(msg)){
-                return false;
-            }
-        }
-
-        db.close();
+        databse_file.close();
     }
 
     return true;

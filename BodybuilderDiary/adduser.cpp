@@ -2,6 +2,8 @@
 #include "ui_adduser.h"
 #include <QMessageBox>
 #include <QSqlQuery>
+#include "databasemanager.h"
+#include "query_messages.h"
 
 enum class UserData {
 
@@ -18,14 +20,14 @@ enum class UserData {
 };
 
 
-AddUser::AddUser(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::AddUser)
+AddUser::AddUser(QSqlDatabase &databse, QWidget *parent)
+    : QDialog(parent),
+      ui(new Ui::AddUser)
 {
     ui->setupUi(this);
 
-    // Prepare database manager
-    //db_manager.prepare();
+    // Getting pointer on the database
+    m_databse = &databse;
 
     // Make all labels bold and with font 12
     // Using lambda-function
@@ -101,7 +103,6 @@ bool AddUser::checkFullName() const {
 }
 
 
-
 /*
     Private slot checks all input data and save it in a database
 */
@@ -123,16 +124,38 @@ void AddUser::on_saveButton_clicked()
                              "Too long notes text");
     }
 
-
+    // Create a new databse for all customers
     // Save data into the databse
-    //QSqlQuery query(db_manager.getDatabase());
+    auto &ref_db_manager = DataBaseManager::getInstance();
+
+    auto res_1 = ref_db_manager.writeData(customers_query);
 
 
+    // Define customers gender
+    int gender{0};
+    if(ui->maleRadioButton->isChecked()){
+        gender = 1;
+    }
 
+    auto res_2 = ref_db_manager.writeData(new_customer_query,
+                {
+                    {":i_full_name", ui->fullNameLineEdit->text()},
+                    {":i_age", ui->ageSpinBox->value()},
+                    {":i_sex", gender},
+                    {":i_height", ui->heightSpinBox->value()},
+                    {":i_weight", ui->weightSpinBox->value()},
+                    {":i_notes", ui->notesTextEdit->toPlainText()}
+
+                });
+
+    if(!res_1 || !res_2){
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't save a new customer");
+    }
+    else{
+        QMessageBox::information(this, "Adding a new customer", "Done!");
+    }
 
     // Close the dialog window
     this->accept();
 }
-
-
-

@@ -2,11 +2,6 @@
 #define QUERY_MESSAGES_H
 
 #include<QString>
-#include<QStringList>
-
-
-// Namespace making these messages private
-namespace {
 
 // For the customers table
 const QString customers_query = "CREATE TABLE IF NOT EXISTS customers ("
@@ -18,6 +13,13 @@ const QString customers_query = "CREATE TABLE IF NOT EXISTS customers ("
                                 "weight INTEGER, "
                                 "notes TEXT)";
 
+// For adding a new customer
+const QString new_customer_query = "INSERT INTO customers ("
+                          "full_name, age, sex, height, weight, notes)"
+                          " VALUES"
+                          "(:i_full_name, :i_age, :i_sex,"
+                          " :i_height, :i_weight, :i_notes)";
+
 // For the exercise table
 const QString exercises_query = "CREATE TABLE IF NOT EXISTS exercises ("
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -25,14 +27,6 @@ const QString exercises_query = "CREATE TABLE IF NOT EXISTS exercises ("
                                 "description TEXT, "
                                 "type INTEGER)";
 
-}
-
-
-
-const QStringList query_msgs{
-    customers_query,
-    exercises_query
-};
 
 
 #endif // QUERY_MESSAGES_H
