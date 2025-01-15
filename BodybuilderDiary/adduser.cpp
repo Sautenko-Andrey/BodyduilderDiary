@@ -128,7 +128,7 @@ void AddUser::on_saveButton_clicked()
     // Save data into the databse
     auto &ref_db_manager = DataBaseManager::getInstance();
 
-    auto res_1 = ref_db_manager.writeData(customers_query);
+    auto res_1 = ref_db_manager.writeRequestToDB(customers_query);
 
 
     // Define customers gender
@@ -137,7 +137,7 @@ void AddUser::on_saveButton_clicked()
         gender = 1;
     }
 
-    auto res_2 = ref_db_manager.writeData(new_customer_query,
+    auto res_2 = ref_db_manager.writeRequestToDB(new_customer_query,
                 {
                     {":i_full_name", ui->fullNameLineEdit->text()},
                     {":i_age", ui->ageSpinBox->value()},

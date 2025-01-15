@@ -36,8 +36,12 @@ QSqlDatabase &DataBaseManager::getDatabase()
 }
 
 
-bool DataBaseManager::writeData(const QString &query_msg)
+bool DataBaseManager::writeRequestToDB(const QString &query_msg)
 {
+    if(query_msg.isEmpty()){
+        return false;
+    }
+
     // Create a query
     QSqlQuery query(getDatabase());
 
@@ -48,9 +52,13 @@ bool DataBaseManager::writeData(const QString &query_msg)
     return false;
 }
 
-bool DataBaseManager::writeData(const QString &query_msg,
+bool DataBaseManager::writeRequestToDB(const QString &query_msg,
                                 const QVector<PairType> &values)
 {
+    if(query_msg.isEmpty() || values.isEmpty()){
+        return false;
+    }
+
     // Create a query
     QSqlQuery query(getDatabase());
 
@@ -65,6 +73,45 @@ bool DataBaseManager::writeData(const QString &query_msg,
     }
 
     return false;
+}
+
+
+/*
+    Method reads data from the databse,
+    saves it into QList and return this list
+*/
+bool DataBaseManager::readRequestToDB(const QString &query_msg,
+                                      QList<QString> &data,
+                                      int columns_num,
+                                      const QStringList &fields)
+{
+
+    if(constexpr int min_cols{1};
+       query_msg.isEmpty() || columns_num < min_cols ||
+       fields.size() != columns_num)
+    {
+        return false;
+    }
+
+    QSqlQuery query(getDatabase());
+
+    if(!query.exec(query_msg)){
+        return false;
+    }
+
+    while(query.next()){
+        // Read data from all columns
+        QStringList row_data;
+
+        for(int i{0}; i < columns_num; ++i){
+            row_data << fields[i] + " : " + query.value(i).toString();
+        }
+
+        // Emplace it into the List data
+        data.emplaceBack(row_data.join(",  "));
+    }
+
+    return true;
 }
 
 

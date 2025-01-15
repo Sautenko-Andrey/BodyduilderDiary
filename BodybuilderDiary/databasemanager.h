@@ -25,9 +25,15 @@ public:
 
     QSqlDatabase& getDatabase();
 
-    bool writeData(const QString &query_msg);
-    bool writeData(const QString &query_msg,
+    bool writeRequestToDB(const QString &query_msg);
+    bool writeRequestToDB(const QString &query_msg,
                    const QVector<PairType> &values);
+
+    bool readRequestToDB(const QString &query_msg,
+                         QList<QString> &data,
+                         int columns_num,
+                         const QStringList &fields);
+
 
 private:
 

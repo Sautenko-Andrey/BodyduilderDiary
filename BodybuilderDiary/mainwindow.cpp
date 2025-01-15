@@ -43,3 +43,15 @@ void MainWindow::on_actionAdd_user_triggered()
 }
 
 
+/*
+    Method calls FinsdUser class
+*/
+void MainWindow::on_actionFind_a_customer_triggered()
+{
+    m_ptr_find_user = std::make_unique<FindCustomer>(this);
+
+    m_ptr_find_user->setWindowTitle("Searching a customer");
+
+    m_ptr_find_user->show();
+}
+

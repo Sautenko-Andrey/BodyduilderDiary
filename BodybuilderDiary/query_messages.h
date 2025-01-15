@@ -27,6 +27,12 @@ const QString exercises_query = "CREATE TABLE IF NOT EXISTS exercises ("
                                 "description TEXT, "
                                 "type INTEGER)";
 
+// For reading all customers
+const QString read_customers_query = "SELECT "
+                                     "full_name, age, sex,"
+                                     " height, weight, notes "
+                                     "FROM customers;";
+
 
 
 #endif // QUERY_MESSAGES_H
