@@ -20,14 +20,11 @@ enum class UserData {
 };
 
 
-AddUser::AddUser(QSqlDatabase &databse, QWidget *parent)
+AddUser::AddUser(QWidget *parent)
     : QDialog(parent),
       ui(new Ui::AddUser)
 {
     ui->setupUi(this);
-
-    // Getting pointer on the database
-    m_databse = &databse;
 
     // Make all labels bold and with font 12
     // Using lambda-function

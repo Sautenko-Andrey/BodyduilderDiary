@@ -35,7 +35,7 @@ MainWindow::~MainWindow()
 */
 void MainWindow::on_actionAdd_user_triggered()
 {
-    m_ptr_add_user = std::make_unique<AddUser>(db_manager.getDatabase(), this);
+    m_ptr_add_user = std::make_unique<AddUser>(this);
 
     m_ptr_add_user->setWindowTitle("Adding a new customer");
 

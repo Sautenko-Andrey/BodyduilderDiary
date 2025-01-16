@@ -28,6 +28,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         databasemanager.h databasemanager.cpp
         query_messages.h
         findcustomer.h findcustomer.cpp findcustomer.ui
+        appstruct.h
+        customer.h customer.cpp
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET BodybuilderDiary APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

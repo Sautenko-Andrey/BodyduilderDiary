@@ -2,7 +2,8 @@
 #define FINDCUSTOMER_H
 
 #include <QDialog>
-
+#include "databasemanager.h"
+#include "customer.h"
 
 namespace Ui {
 class FindCustomer;
@@ -19,9 +20,9 @@ public:
 private:
     Ui::FindCustomer *ui;
 
-    QList<QString> users_data;
+    //MapStruct m_data;
+    QMap<int, std::shared_ptr<Customer>> m_data;
 
-    QList<QPushButton *> users_ptrs_list;
 };
 
 #endif // FINDCUSTOMER_H
