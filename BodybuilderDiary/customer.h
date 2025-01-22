@@ -18,6 +18,19 @@ public:
 
     virtual void setStruct(const QVector<QVariant> &args) override;
 
+    // Getters
+    const QString& getName()const noexcept{ return m_name; }
+
+    int getAge() const noexcept { return m_age; }
+
+    bool getGender() const noexcept { return m_gender; }
+
+    int getHeight() const noexcept { return m_height; }
+
+    int getWeight() const noexcept { return m_weight; }
+
+    const QString& getNotice() const noexcept { return m_notice; }
+
 private:
 
     QString m_name{"Unknown"};

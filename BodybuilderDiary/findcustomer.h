@@ -17,6 +17,9 @@ public:
     explicit FindCustomer(QWidget *parent = nullptr);
     ~FindCustomer();
 
+private slots:
+    void onUserDoubleClicked();
+
 private:
     Ui::FindCustomer *ui;
 
