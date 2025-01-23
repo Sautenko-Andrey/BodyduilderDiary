@@ -40,7 +40,7 @@ public:
 
     template<DerivedFromAppStruct T>
     bool readRequestToDB(const QString &query_msg,
-                         QMap<int, std::shared_ptr<T>> &data,
+                         QMap<QString, std::shared_ptr<T>> &data,
                          int fields_num);
 
 private:
@@ -61,7 +61,7 @@ private:
 // Template methods definition
 template<DerivedFromAppStruct T>
 bool DataBaseManager::readRequestToDB(const QString &query_msg,
-                     QMap<int, std::shared_ptr<T>> &data,
+                     QMap<QString, std::shared_ptr<T>> &data,
                      int fields_num){
 
 
@@ -83,14 +83,14 @@ bool DataBaseManager::readRequestToDB(const QString &query_msg,
         std::shared_ptr<T> ptr_struct = std::make_shared<T>();
 
 
-        for(int i{1}; i < fields_num; ++i){
+        for(int i{0}; i < fields_num; ++i){
             fields.push_back(query.value(i));
         }
 
         ptr_struct->setStruct(fields);
 
         // Save index as key, and other as value
-        data.insert(query.value(0).toInt(), ptr_struct);
+        data.insert(query.value(0).toString(), ptr_struct);
 
     }
 

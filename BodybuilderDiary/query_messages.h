@@ -35,7 +35,7 @@ const QString read_customers_query = "SELECT "
 
 // For reading all customers with id including
 const QString read_customers_query_all = "SELECT "
-                                     "id, full_name, age, sex,"
+                                     "full_name, age, sex,"
                                      " height, weight, notes "
                                      "FROM customers;";
 

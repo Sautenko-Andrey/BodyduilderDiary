@@ -20,12 +20,20 @@ public:
 private slots:
     void onUserDoubleClicked();
 
+    void textEdited();
+
+    void searchCustomer();
+
+    void on_clearAllButton_clicked();
+
+    void on_showUsersListButton_clicked();
+
 private:
     Ui::FindCustomer *ui;
 
-    //MapStruct m_data;
-    QMap<int, std::shared_ptr<Customer>> m_data;
+    QMap<QString, std::shared_ptr<Customer>> m_data;
 
+    void fillListWidget();
 };
 
 #endif // FINDCUSTOMER_H
