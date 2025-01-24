@@ -55,3 +55,14 @@ void MainWindow::on_actionFind_a_customer_triggered()
     m_ptr_find_user->show();
 }
 
+
+/*
+    Method calls EditCustomer class
+*/
+void MainWindow::on_actionEdit_customer_customers_triggered()
+{
+    m_ptr_edit_user = std::make_unique<EditCustomer>(this);
+    m_ptr_edit_user->setWindowTitle("Editing a customer");
+    m_ptr_edit_user->show();
+}
+

@@ -30,6 +30,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         findcustomer.h findcustomer.cpp findcustomer.ui
         appstruct.h
         customer.h customer.cpp
+        editcustomer.h editcustomer.cpp editcustomer.ui
 
 
     )
