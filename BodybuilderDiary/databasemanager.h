@@ -4,7 +4,8 @@
 #include <QSqlDatabase>
 #include <QDir>
 #include <QVariant>
-#include <QMap>
+//#include <QMap>
+#include <QMultiMap>
 #include <QSqlQuery>
 #include "appstruct.h"
 #include <concepts>
@@ -40,7 +41,7 @@ public:
 
     template<DerivedFromAppStruct T>
     bool readRequestToDB(const QString &query_msg,
-                         QMap<QString, std::shared_ptr<T>> &data,
+                         QMultiMap<QString, std::shared_ptr<T>> &data,
                          int fields_num);
 
 private:
@@ -61,7 +62,7 @@ private:
 // Template methods definition
 template<DerivedFromAppStruct T>
 bool DataBaseManager::readRequestToDB(const QString &query_msg,
-                     QMap<QString, std::shared_ptr<T>> &data,
+                     QMultiMap<QString, std::shared_ptr<T>> &data,
                      int fields_num){
 
 

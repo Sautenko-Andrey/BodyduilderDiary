@@ -2,7 +2,7 @@
 #define FINDCUSTOMER_H
 
 #include <QDialog>
-#include "databasemanager.h"
+#include <QMultiMap>
 #include "customer.h"
 
 namespace Ui {
@@ -31,7 +31,7 @@ private slots:
 private:
     Ui::FindCustomer *ui;
 
-    QMap<QString, std::shared_ptr<Customer>> m_data;
+    QMultiMap<QString, std::shared_ptr<Customer>> m_data;
 
     void fillListWidget();
 };

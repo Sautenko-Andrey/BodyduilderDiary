@@ -1,6 +1,7 @@
 #include "findcustomer.h"
 #include "ui_findcustomer.h"
 #include "query_messages.h"
+#include "databasemanager.h"
 
 #include <QMessageBox>
 #include <QPushButton>
@@ -30,7 +31,7 @@ FindCustomer::FindCustomer(QWidget *parent)
     // Showing all customers in the block
     DataBaseManager &ref_db_manager = DataBaseManager::getInstance();
 
-    // Read data from the database and save it into QMap
+    // Read data from the database and save it into QMultiMap
     auto res = ref_db_manager.readRequestToDB(read_customers_query_all,
                                               m_data, Customer::getFieldsNum());
 
