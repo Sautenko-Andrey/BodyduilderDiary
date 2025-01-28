@@ -6,7 +6,7 @@
 // For the customers table
 const QString customers_query = "CREATE TABLE IF NOT EXISTS customers ("
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                "full_name VARCHAR(35), "
+                                "full_name VARCHAR(35) UNIQUE, "
                                 "age INTEGER, "
                                 "sex INTEGER, "
                                 "height INTEGER, "
@@ -38,6 +38,17 @@ const QString read_customers_query_all = "SELECT "
                                      "full_name, age, sex,"
                                      " height, weight, notes "
                                      "FROM customers;";
+
+// For updating a customer
+const QString update_user_query = "UPDATE customers "
+                                  "SET "
+                                  "full_name = :i_new_name, "
+                                  "age = :i_age, "
+                                  "sex = :i_sex, "
+                                  "height = :i_height, "
+                                  "weight = :i_weight, "
+                                  "notes = :i_notes "
+                                  "WHERE full_name = :i_full_name;";
 
 
 

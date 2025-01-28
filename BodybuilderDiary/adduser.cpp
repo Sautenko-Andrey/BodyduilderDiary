@@ -71,7 +71,26 @@ AddUser::AddUser(QWidget *parent)
     ui->weightSpinBox->setMinimum(static_cast<int>(UserData::MinWeight));
     ui->weightSpinBox->setValue(static_cast<int>(UserData::DefaultWeight));
 
+    // Get all customers names
+    // via sql request and save it into a container
 
+    auto &ref_db_manager = DataBaseManager::getInstance();
+    QSqlQuery query(ref_db_manager.getDatabase());
+
+    if(!query.exec("SELECT full_name FROM customers;")){
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't load all customers names");
+        return;
+    }
+    else{
+        while(query.next()){
+            m_customers_names.emplace_back(query.value(0).toString());
+        }
+    }
+
+    // Signals and slots
+    connect(ui->fullNameLineEdit, &QLineEdit::textChanged,
+            this, &AddUser::changeText);
 }
 
 AddUser::~AddUser()
@@ -94,9 +113,11 @@ bool AddUser::checkFullName() const {
 
     int spaces_amount = clear_full_name.count(" ");
 
-    constexpr int max_spaces{1};
+    constexpr int max_spaces{2};
+    constexpr int min_spaces{1};
 
-    return (spaces_amount != max_spaces) ? false : true;
+    return (spaces_amount <= max_spaces &&
+            spaces_amount >= min_spaces) ? true : false;
 }
 
 
@@ -147,7 +168,10 @@ void AddUser::on_saveButton_clicked()
 
     if(!res_1 || !res_2){
         QMessageBox::warning(this, "Database error",
-                             "Couldn't save a new customer");
+                             "Couldn't save a new customer.\n"
+                             "Probably customer with this name already exists.\n"
+                             "HINT! Make name unique.");
+        return;
     }
     else{
         QMessageBox::information(this, "Adding a new customer", "Done!");
@@ -155,4 +179,22 @@ void AddUser::on_saveButton_clicked()
 
     // Close the dialog window
     this->accept();
+}
+
+void AddUser::changeText()
+{
+    // Compare additional name with existed names
+    // If name exists, warn user about it
+
+    // Get current name
+    auto current_name = ui->fullNameLineEdit->text();
+
+    for(const auto &name : m_customers_names){
+        if(current_name == name){
+            QMessageBox::warning(this, "Potential error",
+                                 "Non-unique customer's name");
+
+            return;
+        }
+    }
 }

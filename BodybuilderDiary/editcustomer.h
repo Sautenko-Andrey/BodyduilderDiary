@@ -23,10 +23,14 @@ private slots:
 
     void textEdited();
 
+    void on_editButton_clicked();
+
 private:
     Ui::EditCustomer *ui;
 
-    QMultiMap<QString, std::shared_ptr<Customer>> m_data;
+    QMap<QString, std::shared_ptr<Customer>> m_data;
+
+    QSet<QString> m_customers_names;
 
     QString m_customer_name;
 

@@ -38,7 +38,7 @@ FindCustomer::FindCustomer(QWidget *parent)
     if(!res){
         QMessageBox::warning(this, "Database error",
                                  "Couldn't read customers data");
-        exit(1);
+        return;
     }
 
     // Fill the list widget with customers names

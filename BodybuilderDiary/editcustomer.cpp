@@ -51,7 +51,7 @@ EditCustomer::EditCustomer(QWidget *parent)
     if(!res){
         QMessageBox::warning(this, "Database error",
                              "Couldn't read customers data");
-        exit(1);
+        return;
     }
 
     // Signals and slots
@@ -121,14 +121,15 @@ void EditCustomer::searchCustomer()
 void EditCustomer::textEdited()
 {
     // Get all customers names
-    QStringList customers_names;
 
     for(auto it = m_data.cbegin(); it != m_data.cend(); ++it){
-        customers_names << (*it)->getName();
+        m_customers_names << (*it)->getName();
     }
 
+    QStringList names = QStringList(m_customers_names.begin(), m_customers_names.end());
+
     // Set up QCompliter for auto completer(for user's conveniece)
-    QCompleter *completer = new QCompleter(customers_names, this);
+    QCompleter *completer = new QCompleter(names, this);
 
     // Register independency
     completer->setCaseSensitivity(Qt::CaseInsensitive);
@@ -151,6 +152,7 @@ void EditCustomer::hideDataWidgets()
     ui->weightSpinBox->hide();
     ui->notesLabel->hide();
     ui->notesTextEdit->hide();
+    ui->editButton->hide();
 }
 
 void EditCustomer::showDataWidgets()
@@ -169,4 +171,67 @@ void EditCustomer::showDataWidgets()
     ui->weightSpinBox->show();
     ui->notesLabel->show();
     ui->notesTextEdit->show();
+    ui->editButton->show();
 }
+
+void EditCustomer::on_editButton_clicked()
+{
+    // make an update query to db
+    auto &ref_db_manager = DataBaseManager::getInstance();
+
+    auto gender{1};
+
+    if(ui->femaleRadioButton->isChecked()){
+        gender = 0;
+    }
+
+    auto result = ref_db_manager.writeRequestToDB(update_user_query,
+                            {
+                             {":i_new_name", ui->fullNameLine->text()},
+                             {":i_full_name", m_customer_name},
+                             {":i_age", ui->ageSpinBox->value()},
+                             {":i_sex", gender},
+                             {":i_height", ui->heightSpinBox->value()},
+                             {":i_weight", ui->weightSpinBox->value()},
+                             {":i_notes", ui->notesTextEdit->toPlainText()}
+                            });
+
+    if (!result){
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't save changes");
+        return;
+    }
+
+    QMessageBox::information(this, "Edit report",
+                             "Changes have been saved!");
+
+    // Clean searching line, hide info widgets and resize dialog widget
+    ui->searchLine->clear();
+
+    hideDataWidgets();
+
+    this->resize(
+        static_cast<int>(Size::WidgetWidth),
+        static_cast<int>(Size::HideModeHeight));
+
+    // Get all updated customers names
+
+    m_data.clear();
+
+    // Read data from the database and save it into QMultiMap
+    auto update_res = ref_db_manager.readRequestToDB(read_customers_query_all,
+                                              m_data, Customer::getFieldsNum());
+
+    if(!update_res){
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't read updated customers data");
+        return;
+    }
+
+    m_customers_names.clear();
+
+    for(auto it = m_data.cbegin(); it != m_data.cend(); ++it){
+        m_customers_names << (*it)->getName();
+    }
+}
+
