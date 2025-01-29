@@ -7,6 +7,7 @@
 #include "databasemanager.h"
 #include "findcustomer.h"
 #include "editcustomer.h"
+#include "deletecustomer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -29,6 +30,8 @@ private slots:
 
     void on_actionEdit_customer_customers_triggered();
 
+    void on_actionDelete_a_customer_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -40,6 +43,9 @@ private:
 
     // Pointer on EditCustomer widget
     std::unique_ptr<EditCustomer> m_ptr_edit_user{nullptr};
+
+    // Pointer on DeleteCustomer widget
+    std::unique_ptr<DeleteCustomer> m_ptr_delete_customer{nullptr};
 
     DataBaseManager &db_manager = DataBaseManager::getInstance();
 

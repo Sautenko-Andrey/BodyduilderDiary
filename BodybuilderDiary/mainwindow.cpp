@@ -66,3 +66,14 @@ void MainWindow::on_actionEdit_customer_customers_triggered()
     m_ptr_edit_user->show();
 }
 
+
+/*
+    Method calls DeleteCustomer class
+*/
+void MainWindow::on_actionDelete_a_customer_triggered()
+{
+    m_ptr_delete_customer = std::make_unique<DeleteCustomer>(this);
+    m_ptr_delete_customer->setWindowTitle("Deleting a customer");
+    m_ptr_delete_customer->show();
+}
+

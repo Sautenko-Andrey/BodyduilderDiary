@@ -31,6 +31,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         appstruct.h
         customer.h customer.cpp
         editcustomer.h editcustomer.cpp editcustomer.ui
+        deletecustomer.h deletecustomer.cpp deletecustomer.ui
 
 
     )

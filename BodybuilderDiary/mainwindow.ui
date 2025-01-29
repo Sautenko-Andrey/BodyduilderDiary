@@ -29,6 +29,7 @@
     </property>
     <addaction name="actionFind_a_customer"/>
     <addaction name="actionFind_an_exercise"/>
+    <addaction name="actionDelete_a_customer"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -62,6 +63,7 @@
    <addaction name="actionAdd_user"/>
    <addaction name="actionFind_a_customer"/>
    <addaction name="actionEdit_customer_customers"/>
+   <addaction name="actionDelete_a_customer"/>
    <addaction name="separator"/>
   </widget>
   <action name="actionAdd_user">
@@ -104,6 +106,15 @@
   <action name="actionFind_an_exercise">
    <property name="text">
     <string>Find an exercise</string>
+   </property>
+  </action>
+  <action name="actionDelete_a_customer">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/delete_customer.png</normaloff>:/images/delete_customer.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete a customer</string>
    </property>
   </action>
  </widget>

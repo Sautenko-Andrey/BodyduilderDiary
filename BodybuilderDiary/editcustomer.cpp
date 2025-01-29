@@ -5,7 +5,6 @@
 
 #include <QMessageBox>
 #include <QCompleter>
-#include <QDebug>
 
 enum class Size{
     MaxAge = 100,
