@@ -32,7 +32,7 @@ FindCustomer::FindCustomer(QWidget *parent)
     DataBaseManager &ref_db_manager = DataBaseManager::getInstance();
 
     // Read data from the database and save it into QMultiMap
-    auto res = ref_db_manager.readRequestToDB(read_customers_query_all,
+    auto res = ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
                                               m_data, Customer::getFieldsNum());
 
     if(!res){

@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include "databasemanager.h"
 #include "query_messages.h"
+#include "utils.h"
 
 enum class UserData {
 
@@ -27,26 +28,13 @@ AddUser::AddUser(QWidget *parent)
     ui->setupUi(this);
 
     // Make all labels bold and with font 12
-    // Using lambda-function
-    auto makeLabelBold = (
-        [this](QLabel *label) -> void {
-
-        label->setAlignment(Qt::AlignCenter);
-
-        QFont font = label->font();
-
-        font.setBold(true);
-        font.setPointSize(12);
-
-        label->setFont(font);
-    });
-
-    makeLabelBold(ui->fullNameLabel);
-    makeLabelBold(ui->ageLabel);
-    makeLabelBold(ui->weightLabel);
-    makeLabelBold(ui->heightLabel);
-    makeLabelBold(ui->notesLabel);
-    makeLabelBold(ui->genderLabel);
+    constexpr int size{12};
+    Utils::changeLabelStyle(ui->fullNameLabel, size);
+    Utils::changeLabelStyle(ui->ageLabel, size);
+    Utils::changeLabelStyle(ui->weightLabel, size);
+    Utils::changeLabelStyle(ui->heightLabel, size);
+    Utils::changeLabelStyle(ui->notesLabel, size);
+    Utils::changeLabelStyle(ui->genderLabel, size);
 
     // Widget settings
 
@@ -142,12 +130,8 @@ void AddUser::on_saveButton_clicked()
                              "Too long notes text");
     }
 
-    // Create a new databse for all customers
     // Save data into the databse
     auto &ref_db_manager = DataBaseManager::getInstance();
-
-    auto res_1 = ref_db_manager.writeRequestToDB(customers_query);
-
 
     // Define customers gender
     int gender{0};
@@ -155,7 +139,7 @@ void AddUser::on_saveButton_clicked()
         gender = 1;
     }
 
-    auto res_2 = ref_db_manager.writeRequestToDB(new_customer_query,
+    auto res = ref_db_manager.writeRequestToDB(CustomQuery::new_customer_query,
                 {
                     {":i_full_name", ui->fullNameLineEdit->text()},
                     {":i_age", ui->ageSpinBox->value()},
@@ -166,7 +150,7 @@ void AddUser::on_saveButton_clicked()
 
                 });
 
-    if(!res_1 || !res_2){
+    if(!res){
         QMessageBox::warning(this, "Database error",
                              "Couldn't save a new customer.\n"
                              "Probably customer with this name already exists.\n"
@@ -189,12 +173,14 @@ void AddUser::changeText()
     // Get current name
     auto current_name = ui->fullNameLineEdit->text();
 
-    for(const auto &name : m_customers_names){
-        if(current_name == name){
-            QMessageBox::warning(this, "Potential error",
-                                 "Non-unique customer's name");
+    auto res = Utils::checkUniqueText(
+        current_name, m_customers_names
+    );
 
-            return;
-        }
+    if(!res){
+        QMessageBox::warning(this, "Potential error",
+                             "Non-unique customer's name");
+        return;
     }
+
 }

@@ -77,3 +77,41 @@ void MainWindow::on_actionDelete_a_customer_triggered()
     m_ptr_delete_customer->show();
 }
 
+
+/*
+    Method calls AddExercise class
+*/
+void MainWindow::on_actionAdd_a_new_exercise_triggered()
+{
+    m_ptr_add_exercise = std::make_unique<AddExercise>(this);
+    m_ptr_add_exercise->setWindowTitle("Adding a new exercise");
+    m_ptr_add_exercise->show();
+}
+
+
+/*
+    Method calls EditExercise class
+*/
+void MainWindow::on_actionEdit_exercise_exercises_triggered()
+{
+
+}
+
+
+/*
+    Method calls FindExercise class
+*/
+void MainWindow::on_actionFind_an_exercise_triggered()
+{
+
+}
+
+
+/*
+    Method calls DeleteExercise class
+*/
+void MainWindow::on_actionDelete_exercise_triggered()
+{
+
+}
+

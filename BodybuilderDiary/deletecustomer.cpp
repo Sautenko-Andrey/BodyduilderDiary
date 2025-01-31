@@ -35,7 +35,7 @@ DeleteCustomer::DeleteCustomer(QWidget *parent)
     // Get all customers names
     DataBaseManager &ref_db_manager = DataBaseManager::getInstance();
 
-    auto res = ref_db_manager.readRequestToDB(read_customers_query_all,
+    auto res = ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
                                        m_data, Customer::getFieldsNum());
 
     if(!res){
@@ -127,7 +127,7 @@ void DeleteCustomer::on_deleteButton_clicked()
     m_data.clear();
 
     // Read data from the database and save it into QMultiMap
-    auto update_res = ref_db_manager.readRequestToDB(read_customers_query_all,
+    auto update_res = ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
                                                      m_data, Customer::getFieldsNum());
 
     if(!update_res){

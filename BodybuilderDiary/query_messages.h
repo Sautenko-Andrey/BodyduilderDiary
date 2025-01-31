@@ -3,6 +3,7 @@
 
 #include<QString>
 
+namespace CustomQuery {
 // For the customers table
 const QString customers_query = "CREATE TABLE IF NOT EXISTS customers ("
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -15,10 +16,10 @@ const QString customers_query = "CREATE TABLE IF NOT EXISTS customers ("
 
 // For adding a new customer
 const QString new_customer_query = "INSERT INTO customers ("
-                          "full_name, age, sex, height, weight, notes)"
-                          " VALUES"
-                          "(:i_full_name, :i_age, :i_sex,"
-                          " :i_height, :i_weight, :i_notes)";
+                                   "full_name, age, sex, height, weight, notes)"
+                                   " VALUES"
+                                   "(:i_full_name, :i_age, :i_sex,"
+                                   " :i_height, :i_weight, :i_notes)";
 
 // For the exercise table
 const QString exercises_query = "CREATE TABLE IF NOT EXISTS exercises ("
@@ -26,6 +27,12 @@ const QString exercises_query = "CREATE TABLE IF NOT EXISTS exercises ("
                                 "name VARCHAR(50), "
                                 "description TEXT, "
                                 "type INTEGER)";
+
+const QString add_exercise_query = "INSERT INTO exercises ("
+                                   "name, description, type)"
+                                   " VALUES"
+                                   "(:i_name, :i_descr, :i_type);";
+
 
 // For reading all customers
 const QString read_customers_query = "SELECT "
@@ -35,9 +42,9 @@ const QString read_customers_query = "SELECT "
 
 // For reading all customers with id including
 const QString read_customers_query_all = "SELECT "
-                                     "full_name, age, sex,"
-                                     " height, weight, notes "
-                                     "FROM customers;";
+                                         "full_name, age, sex,"
+                                         " height, weight, notes "
+                                         "FROM customers;";
 
 // For updating a customer
 const QString update_user_query = "UPDATE customers "
@@ -49,6 +56,11 @@ const QString update_user_query = "UPDATE customers "
                                   "weight = :i_weight, "
                                   "notes = :i_notes "
                                   "WHERE full_name = :i_full_name;";
+
+
+
+}// End CustomQuery namespace
+
 
 
 

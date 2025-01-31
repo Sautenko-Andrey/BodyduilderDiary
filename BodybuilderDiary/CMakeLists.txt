@@ -32,6 +32,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         customer.h customer.cpp
         editcustomer.h editcustomer.cpp editcustomer.ui
         deletecustomer.h deletecustomer.cpp deletecustomer.ui
+        exercise.h exercise.cpp
+        addexercise.h addexercise.cpp addexercise.ui
+        utils.h utils.cpp
 
 
     )

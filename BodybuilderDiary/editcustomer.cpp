@@ -44,7 +44,7 @@ EditCustomer::EditCustomer(QWidget *parent)
     auto &ref_db_manager = DataBaseManager::getInstance();
 
     // Read data from the database and save it into QMultiMap
-    auto res = ref_db_manager.readRequestToDB(read_customers_query_all,
+    auto res = ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
                                               m_data, Customer::getFieldsNum());
 
     if(!res){
@@ -184,7 +184,7 @@ void EditCustomer::on_editButton_clicked()
         gender = 0;
     }
 
-    auto result = ref_db_manager.writeRequestToDB(update_user_query,
+    auto result = ref_db_manager.writeRequestToDB(CustomQuery::update_user_query,
                             {
                              {":i_new_name", ui->fullNameLine->text()},
                              {":i_full_name", m_customer_name},
@@ -218,7 +218,7 @@ void EditCustomer::on_editButton_clicked()
     m_data.clear();
 
     // Read data from the database and save it into QMultiMap
-    auto update_res = ref_db_manager.readRequestToDB(read_customers_query_all,
+    auto update_res = ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
                                               m_data, Customer::getFieldsNum());
 
     if(!update_res){

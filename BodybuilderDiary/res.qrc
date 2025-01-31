@@ -4,5 +4,9 @@
         <file>edit_customer.png</file>
         <file>search_customer.png</file>
         <file>delete_customer.png</file>
+        <file>add_exercise.png</file>
+        <file>delete_exercise.png</file>
+        <file>find_exercise.png</file>
+        <file>set_exercise.png</file>
     </qresource>
 </RCC>

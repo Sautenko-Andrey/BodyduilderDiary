@@ -8,6 +8,7 @@
 #include "findcustomer.h"
 #include "editcustomer.h"
 #include "deletecustomer.h"
+#include "addexercise.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -32,6 +33,14 @@ private slots:
 
     void on_actionDelete_a_customer_triggered();
 
+    void on_actionAdd_a_new_exercise_triggered();
+
+    void on_actionEdit_exercise_exercises_triggered();
+
+    void on_actionFind_an_exercise_triggered();
+
+    void on_actionDelete_exercise_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -46,6 +55,9 @@ private:
 
     // Pointer on DeleteCustomer widget
     std::unique_ptr<DeleteCustomer> m_ptr_delete_customer{nullptr};
+
+    // Pointer on AddExercise widget
+    std::unique_ptr<AddExercise> m_ptr_add_exercise{nullptr};
 
     DataBaseManager &db_manager = DataBaseManager::getInstance();
 

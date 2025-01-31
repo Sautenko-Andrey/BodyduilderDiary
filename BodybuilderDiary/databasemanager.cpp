@@ -1,5 +1,6 @@
 #include "databasemanager.h"
 #include <QFile>
+#include "query_messages.h"
 
 
 DataBaseManager::~DataBaseManager()
@@ -25,6 +26,14 @@ bool DataBaseManager::prepare()
     if(!m_database.open()){
         return false;
     }
+
+    // Create users and exercises table
+    auto res_exercises = writeRequestToDB(CustomQuery::exercises_query);
+    auto res_users = writeRequestToDB(CustomQuery::customers_query);
+    if(!res_exercises || !res_users){
+        return false;
+    }
+
     return true;
 }
 

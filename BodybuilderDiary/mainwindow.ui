@@ -30,6 +30,7 @@
     <addaction name="actionFind_a_customer"/>
     <addaction name="actionFind_an_exercise"/>
     <addaction name="actionDelete_a_customer"/>
+    <addaction name="actionDelete_exercise"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
@@ -65,6 +66,11 @@
    <addaction name="actionEdit_customer_customers"/>
    <addaction name="actionDelete_a_customer"/>
    <addaction name="separator"/>
+   <addaction name="actionAdd_a_new_exercise"/>
+   <addaction name="actionEdit_exercise_exercises"/>
+   <addaction name="actionFind_an_exercise"/>
+   <addaction name="actionDelete_exercise"/>
+   <addaction name="separator"/>
   </widget>
   <action name="actionAdd_user">
    <property name="icon">
@@ -76,6 +82,10 @@
    </property>
   </action>
   <action name="actionAdd_a_new_exercise">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/add_exercise.png</normaloff>:/images/add_exercise.png</iconset>
+   </property>
    <property name="text">
     <string>Add a new exercise</string>
    </property>
@@ -90,6 +100,10 @@
    </property>
   </action>
   <action name="actionEdit_exercise_exercises">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/set_exercise.png</normaloff>:/images/set_exercise.png</iconset>
+   </property>
    <property name="text">
     <string>Edit exercise/exercises</string>
    </property>
@@ -104,6 +118,10 @@
    </property>
   </action>
   <action name="actionFind_an_exercise">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/find_exercise.png</normaloff>:/images/find_exercise.png</iconset>
+   </property>
    <property name="text">
     <string>Find an exercise</string>
    </property>
@@ -115,6 +133,15 @@
    </property>
    <property name="text">
     <string>Delete a customer</string>
+   </property>
+  </action>
+  <action name="actionDelete_exercise">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/images/delete_exercise.png</normaloff>:/images/delete_exercise.png</iconset>
+   </property>
+   <property name="text">
+    <string>Delete an exercise</string>
    </property>
   </action>
  </widget>
