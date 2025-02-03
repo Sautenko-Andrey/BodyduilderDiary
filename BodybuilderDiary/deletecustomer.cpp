@@ -186,5 +186,9 @@ void DeleteCustomer::enterPressed()
            << "\n\nNotice:\t" << (*res)->getNotice();
 
     ui->plainTextEdit->setPlainText(info);
+
+    // Make info widget disable
+    ui->plainTextEdit->setDisabled(true);
+
 }
 

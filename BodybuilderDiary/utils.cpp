@@ -47,7 +47,7 @@ void AddExercise::changeText()
 }
 */
 
-bool checkUniqueText(const QString &text, const QStringList &data){
+bool checkUniqueText(const QString &text, const std::deque<QString> &data){
     for(const auto &el : data){
         if(text == el){
             return false;

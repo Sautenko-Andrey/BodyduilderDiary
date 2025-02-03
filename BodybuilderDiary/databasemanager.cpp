@@ -27,10 +27,22 @@ bool DataBaseManager::prepare()
         return false;
     }
 
-    // Create users and exercises table
+    // Create users and exercises table and indexes for them
     auto res_exercises = writeRequestToDB(CustomQuery::exercises_query);
+
+    auto res_exercises_index =
+        writeRequestToDB(CustomQuery::exercises_index_query);
+
     auto res_users = writeRequestToDB(CustomQuery::customers_query);
-    if(!res_exercises || !res_users){
+
+    auto res_users_indexing =
+        writeRequestToDB(CustomQuery::customers_index_query);
+
+    if(!res_exercises ||
+       !res_users ||
+       !res_users_indexing ||
+       !res_exercises_index)
+    {
         return false;
     }
 

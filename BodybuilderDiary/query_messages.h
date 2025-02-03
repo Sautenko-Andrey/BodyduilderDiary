@@ -12,7 +12,12 @@ const QString customers_query = "CREATE TABLE IF NOT EXISTS customers ("
                                 "sex INTEGER, "
                                 "height INTEGER, "
                                 "weight INTEGER, "
-                                "notes TEXT)";
+                                "notes TEXT);";
+
+const QString customers_index_query = "CREATE INDEX IF NOT EXISTS "
+                            "idx_customers_full_name ON "
+                            "customers(full_name);";
+
 
 // For adding a new customer
 const QString new_customer_query = "INSERT INTO customers ("
@@ -26,7 +31,11 @@ const QString exercises_query = "CREATE TABLE IF NOT EXISTS exercises ("
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                                 "name VARCHAR(50), "
                                 "description TEXT, "
-                                "type INTEGER)";
+                                "type INTEGER);";
+
+const QString exercises_index_query = "CREATE INDEX IF NOT EXISTS "
+                                      "idx_exercises_name "
+                                      "ON exercises(name);";
 
 const QString add_exercise_query = "INSERT INTO exercises ("
                                    "name, description, type)"

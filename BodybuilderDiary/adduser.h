@@ -2,7 +2,7 @@
 #define ADDUSER_H
 
 #include <QDialog>
-
+#include <deque>
 
 namespace Ui {
 class AddUser;
@@ -25,7 +25,7 @@ private slots:
 private:
     Ui::AddUser *ui;
 
-    QStringList m_customers_names;
+    std::deque<QString> m_customers_names;
 
     // Validation functions
     bool checkFullName() const;

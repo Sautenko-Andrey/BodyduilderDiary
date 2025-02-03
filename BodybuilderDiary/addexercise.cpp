@@ -35,7 +35,7 @@ AddExercise::AddExercise(QWidget *parent)
     }
     else{
         while(query.next()){
-            m_exercises_names.emplace_back(query.value(0).toString());
+            m_names.emplace_back(query.value(0).toString());
         }
     }
 
@@ -60,7 +60,7 @@ void AddExercise::changeText()
     auto current_title = ui->titleLineEdit->text();
 
     auto unique_res = Utils::checkUniqueText(current_title,
-                                             m_exercises_names);
+                                             m_names);
     if(!unique_res){
         QMessageBox::warning(this, "Potential error",
                              "Non-unique exercise's name");

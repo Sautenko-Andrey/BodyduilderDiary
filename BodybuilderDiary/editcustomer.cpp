@@ -82,8 +82,9 @@ void EditCustomer::searchCustomer()
         static_cast<int>(Size::RegularModeHeight)
     );
 
-    // Make all widgets visible
+    // Make all widgets visible and disable
     showDataWidgets();
+
 
     // Get target name
     m_customer_name = ui->searchLine->text();
@@ -172,6 +173,7 @@ void EditCustomer::showDataWidgets()
     ui->notesTextEdit->show();
     ui->editButton->show();
 }
+
 
 void EditCustomer::on_editButton_clicked()
 {

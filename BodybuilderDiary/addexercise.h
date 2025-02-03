@@ -2,6 +2,7 @@
 #define ADDEXERCISE_H
 
 #include <QDialog>
+#include<deque>
 
 namespace Ui {
 class AddExercise;
@@ -28,7 +29,7 @@ private:
         "Gym", "Cardio", "Warm-up"
     };
 
-    QStringList m_exercises_names;
+    std::deque<QString> m_names;
 };
 
 #endif // ADDEXERCISE_H

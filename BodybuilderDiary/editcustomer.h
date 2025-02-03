@@ -37,6 +37,7 @@ private:
     void hideDataWidgets();
 
     void showDataWidgets();
+
 };
 
 #endif // EDITCUSTOMER_H
