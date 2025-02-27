@@ -26,27 +26,6 @@ void changeLabelStyle(QLabel *label, int size, bool is_bold){
 }
 
 
-
-/*
-void AddExercise::changeText()
-{
-    // Compare additional exercises with existed names
-    // If name exists, warn user about it
-
-    // Get current name
-    auto current_title = ui->titleLineEdit->text();
-
-    for(const auto &name : m_exercises_names){
-        if(current_title == name){
-            QMessageBox::warning(this, "Potential error",
-                                 "Non-unique exercise's name");
-
-            return;
-        }
-    }
-}
-*/
-
 bool checkUniqueText(const QString &text, const std::deque<QString> &data){
     for(const auto &el : data){
         if(text == el){

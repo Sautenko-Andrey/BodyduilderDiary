@@ -15,7 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     // Creating all tables for the proper work
-    //db_manager.createDB(query_msgs);
     if(!db_manager.prepare()){
         QMessageBox::warning(this,
                              "Database error",

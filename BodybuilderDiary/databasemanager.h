@@ -34,6 +34,7 @@ public:
     QSqlDatabase& getDatabase();
 
     bool writeRequestToDB(const QString &query_msg);
+
     bool writeRequestToDB(const QString &query_msg,
                    const QVector<PairType> &values);
 
@@ -96,6 +97,5 @@ bool DataBaseManager::readRequestToDB(const QString &query_msg,
 
     return true;
 }
-
 
 #endif // DATABASEMANAGER_H

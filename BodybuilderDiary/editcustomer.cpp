@@ -21,6 +21,10 @@ EditCustomer::EditCustomer(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // Reserve memory for customers names
+    constexpr int possible_cust_num{25};
+    m_customers_names.reserve(possible_cust_num);
+
     // Main widget settings
     this->resize(
         static_cast<int>(Size::WidgetWidth),

@@ -12,10 +12,6 @@ AddExercise::AddExercise(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // const QStringList exercises_types_names {
-    //     "Gym", "Cardio", "Warm-up"
-    // };
-
     ui->typeComboBox->addItems(m_exercises_types_names);
 
     // Make all labels bold and with font 12

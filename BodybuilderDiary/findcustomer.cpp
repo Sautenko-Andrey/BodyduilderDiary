@@ -86,7 +86,7 @@ void FindCustomer::onUserDoubleClicked()
     auto current_item = ui->InfoListWidget->currentItem();
 
     // Search a customer's data by key(name)
-    auto it = m_data.find(std::move(current_item->text()));
+    auto it = m_data.find(current_item->text());
 
     if(it != m_data.end()){
         // Make info string
