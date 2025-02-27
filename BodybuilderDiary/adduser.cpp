@@ -94,10 +94,10 @@ AddUser::~AddUser()
 */
 bool AddUser::checkFullName() const {
 
-    const QString &full_name = ui->fullNameLineEdit->text();
+    const auto full_name = ui->fullNameLineEdit->text();
 
     // Delete unwated spaces from the full name line
-    const QString clear_full_name = full_name.trimmed();
+    const auto clear_full_name = full_name.trimmed();
 
     int spaces_amount = clear_full_name.count(" ");
 
@@ -121,7 +121,7 @@ void AddUser::on_saveButton_clicked()
     }
 
     // Checking notes text lenght
-    const QString &notes_text = ui->notesTextEdit->placeholderText();
+    const auto notes_text = ui->notesTextEdit->placeholderText();
 
     constexpr int max_notes_symbols{200};
 
@@ -135,6 +135,7 @@ void AddUser::on_saveButton_clicked()
 
     // Define customers gender
     int gender{0};
+
     if(ui->maleRadioButton->isChecked()){
         gender = 1;
     }
@@ -171,7 +172,7 @@ void AddUser::changeText()
     // If name exists, warn user about it
 
     // Get current name
-    auto current_name = ui->fullNameLineEdit->text();
+    const auto current_name = ui->fullNameLineEdit->text();
 
     auto res = Utils::checkUniqueText(
         current_name, m_customers_names

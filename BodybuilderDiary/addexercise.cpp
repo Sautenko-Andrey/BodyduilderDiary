@@ -67,8 +67,8 @@ void AddExercise::changeText()
 
 void AddExercise::on_addPushButton_clicked()
 {
-    const QString &title = ui->titleLineEdit->text();
-    const QString &descr = ui->descriptionPlainTextEdit->toPlainText();
+    const auto title = ui->titleLineEdit->text();
+    const auto descr = ui->descriptionPlainTextEdit->toPlainText();
 
     // Check if the title is empty string
     if(title.isEmpty()){

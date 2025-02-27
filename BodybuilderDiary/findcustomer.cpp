@@ -73,7 +73,7 @@ void FindCustomer::fillListWidget(){
         // Fill the list widget with customers names
         std::for_each(m_data.cbegin(), m_data.cend(), [this](const auto &el){
 
-            auto &name = el->getName();
+            const auto name = el->getName();
 
             ui->InfoListWidget->addItem(name);
         });
@@ -83,7 +83,7 @@ void FindCustomer::fillListWidget(){
 void FindCustomer::onUserDoubleClicked()
 {
     // Get selected cusomer
-    auto current_item = ui->InfoListWidget->currentItem();
+    const auto current_item = ui->InfoListWidget->currentItem();
 
     // Search a customer's data by key(name)
     auto it = m_data.find(current_item->text());
