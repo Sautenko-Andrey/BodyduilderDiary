@@ -6,7 +6,7 @@
 #include <QDir>
 #include <QFile>
 #include <QMessageBox>
-
+#include "exercise.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -47,7 +47,7 @@ void MainWindow::on_actionAdd_user_triggered()
 */
 void MainWindow::on_actionFind_a_customer_triggered()
 {
-    m_ptr_find_user = std::make_unique<FindCustomer>(this);
+    m_ptr_find_user = std::make_unique<Find>(FindType::Customer, this);
 
     m_ptr_find_user->setWindowTitle("Searching a customer");
 
@@ -102,7 +102,9 @@ void MainWindow::on_actionEdit_exercise_exercises_triggered()
 */
 void MainWindow::on_actionFind_an_exercise_triggered()
 {
-
+    m_ptr_find_exercise = std::make_unique<Find>(FindType::Exercise, this);
+    m_ptr_find_exercise->setWindowTitle("Seeking an exercise");
+    m_ptr_find_exercise->show();
 }
 
 

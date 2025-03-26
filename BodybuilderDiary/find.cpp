@@ -1,5 +1,5 @@
-#include "findcustomer.h"
-#include "ui_findcustomer.h"
+#include "find.h"
+#include "ui_find.h"
 #include "query_messages.h"
 #include "databasemanager.h"
 
@@ -9,12 +9,16 @@
 #include <QTextStream>
 #include <QCompleter>
 
+#include "customer.h"
+#include "exercise.h"
+
+
 enum class Sizes {
     SearchLineMinWidth = 350,
     SearchLineMaxWidth = 500
 };
 
-FindCustomer::FindCustomer(QWidget *parent)
+Find::Find(FindType find_type, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::FindCustomer)
 {
@@ -31,15 +35,17 @@ FindCustomer::FindCustomer(QWidget *parent)
     // Showing all customers in the block
     DataBaseManager &ref_db_manager = DataBaseManager::getInstance();
 
-    // Read data from the database and save it into QMultiMap
-    auto res = ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
-                                              m_data, Customer::getFieldsNum());
+    //Read data from the database and save it into QMultiMap
+    bool res =
+        ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
+                                           m_data, Customer::getFieldsNum());
 
     if(!res){
         QMessageBox::warning(this, "Database error",
                                  "Couldn't read customers data");
         return;
     }
+
 
     // Fill the list widget with customers names
     fillListWidget();
@@ -48,24 +54,24 @@ FindCustomer::FindCustomer(QWidget *parent)
 
     // User double clicks on a sone line in the widget list
     connect(ui->InfoListWidget, &QListWidget::doubleClicked,
-            this, &FindCustomer::onUserDoubleClicked);
+            this, &Find::onUserDoubleClicked);
 
     // User types something in the searching line
     connect(ui->searchLineEdit, &QLineEdit::textEdited,
-            this, &FindCustomer::textEdited);
+            this, &Find::textEdited);
 
     // Search customers via Completer
     connect(ui->searchLineEdit, &QLineEdit::returnPressed,
-            this, &FindCustomer::searchCustomer);
+            this, &Find::searchCustomer);
 }
 
-FindCustomer::~FindCustomer()
+Find::~Find()
 {
     delete ui;
 }
 
 
-void FindCustomer::fillListWidget(){
+void Find::fillListWidget(){
 
     if(constexpr int zero_items{0};
        ui->InfoListWidget->count() == zero_items)
@@ -80,7 +86,7 @@ void FindCustomer::fillListWidget(){
     }
 }
 
-void FindCustomer::onUserDoubleClicked()
+void Find::onUserDoubleClicked()
 {
     // Get selected cusomer
     const auto current_item = ui->InfoListWidget->currentItem();
@@ -103,7 +109,7 @@ void FindCustomer::onUserDoubleClicked()
     }
 }
 
-void FindCustomer::textEdited()
+void Find::textEdited()
 {
     ui->InfoListWidget->clear();
 
@@ -128,7 +134,7 @@ void FindCustomer::textEdited()
     ui->searchLineEdit->setCompleter(completer);
 }
 
-void FindCustomer::searchCustomer()
+void Find::searchCustomer()
 {
     QString search_name = ui->searchLineEdit->text();
 
@@ -149,7 +155,7 @@ void FindCustomer::searchCustomer()
     }
 }
 
-void FindCustomer::on_clearAllButton_clicked()
+void Find::on_clearAllButton_clicked()
 {
     // Clear an entire searching line
     ui->searchLineEdit->clear();
@@ -162,7 +168,7 @@ void FindCustomer::on_clearAllButton_clicked()
 }
 
 
-void FindCustomer::on_showUsersListButton_clicked()
+void Find::on_showUsersListButton_clicked()
 {
     ui->InfoListWidget->clear();
     fillListWidget();

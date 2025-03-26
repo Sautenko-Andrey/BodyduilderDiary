@@ -5,10 +5,11 @@
 
 #include "adduser.h"
 #include "databasemanager.h"
-#include "findcustomer.h"
+#include "find.h"
 #include "editcustomer.h"
 #include "deletecustomer.h"
 #include "addexercise.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -48,7 +49,7 @@ private:
     std::unique_ptr<AddUser> m_ptr_add_user{nullptr};
 
     // Pointer on FindCustomer widget
-    std::unique_ptr<FindCustomer> m_ptr_find_user{nullptr};
+    std::unique_ptr<Find> m_ptr_find_user{nullptr};
 
     // Pointer on EditCustomer widget
     std::unique_ptr<EditCustomer> m_ptr_edit_user{nullptr};
@@ -58,6 +59,9 @@ private:
 
     // Pointer on AddExercise widget
     std::unique_ptr<AddExercise> m_ptr_add_exercise{nullptr};
+
+    // For seeking an exercise
+    std::unique_ptr<Find> m_ptr_find_exercise{nullptr};
 
     DataBaseManager &db_manager = DataBaseManager::getInstance();
 

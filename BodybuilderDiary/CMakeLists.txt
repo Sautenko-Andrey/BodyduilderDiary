@@ -27,7 +27,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         adduser.h adduser.cpp adduser.ui
         databasemanager.h databasemanager.cpp
         query_messages.h
-        findcustomer.h findcustomer.cpp findcustomer.ui
+        find.h find.cpp find.ui
         appstruct.h
         customer.h customer.cpp
         editcustomer.h editcustomer.cpp editcustomer.ui
@@ -36,6 +36,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         addexercise.h addexercise.cpp addexercise.ui
         utils.h utils.cpp
 
+
+
+        findmanager.h findmanager.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -1,21 +1,24 @@
-#ifndef FINDCUSTOMER_H
-#define FINDCUSTOMER_H
+#ifndef FIND_H
+#define FIND_H
 
 #include <QDialog>
 #include <QMap>
 #include "customer.h"
 
+
 namespace Ui {
 class FindCustomer;
 }
 
-class FindCustomer : public QDialog
+enum class FindType { Customer, Exercise };
+
+class Find : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit FindCustomer(QWidget *parent = nullptr);
-    ~FindCustomer();
+    Find(FindType find_type, QWidget *parent = nullptr);
+    ~Find();
 
 private slots:
     void onUserDoubleClicked();
@@ -36,4 +39,4 @@ private:
     void fillListWidget();
 };
 
-#endif // FINDCUSTOMER_H
+#endif // FIND_H
