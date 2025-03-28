@@ -19,6 +19,8 @@ public:
 
     const QString& getTitle() const { return m_title; }
 
+    const QString& getName() const { return m_title; }  // !!!Dublication
+
     ExerciseType getExerciseType() { return m_type; }
 
     const QString& getDescription() const { return m_description; }
