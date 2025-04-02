@@ -58,7 +58,7 @@ const QString read_customers_query_all = "SELECT "
 
 // For reading all exercises with id including
 const QString read_exercises_query_all = "SELECT "
-                                         "name, description, type "
+                                         "name, type, description "
                                          "FROM exercises;";
 
 // For updating a customer

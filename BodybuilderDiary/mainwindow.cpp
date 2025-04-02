@@ -106,9 +106,13 @@ void MainWindow::on_actionEdit_exercise_exercises_triggered()
 */
 void MainWindow::on_actionFind_an_exercise_triggered()
 {
-    m_ptr_find_exercise = std::make_unique<Find>(FindType::Exercise, this);
-    m_ptr_find_exercise->setWindowTitle("Seeking an exercise");
-    m_ptr_find_exercise->show();
+    // m_ptr_find_exercise = std::make_unique<Find>(FindType::Exercise, this);
+    // m_ptr_find_exercise->setWindowTitle("Seeking an exercise");
+    // m_ptr_find_exercise->show();
+
+    m_ptr_search_exercise = std::make_unique<SearchExercise>();
+    m_ptr_search_exercise->setWindowTitle("Seeking an exercise");
+    m_ptr_search_exercise->show();
 }
 
 

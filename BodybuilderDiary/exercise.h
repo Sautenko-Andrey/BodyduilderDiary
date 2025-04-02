@@ -21,9 +21,12 @@ public:
 
     const QString& getName() const { return m_title; }  // !!!Dublication
 
-    ExerciseType getExerciseType() { return m_type; }
+    const QString getExerciseType();
 
     const QString& getDescription() const { return m_description; }
+
+    // Exercise has 3 fields + id
+    static constexpr int getFieldsNum() noexcept { return 4; }
 
 
 private:
