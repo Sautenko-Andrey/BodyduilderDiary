@@ -16,7 +16,7 @@ public:
     virtual ~SearchStruct();
 
 
-private slots:
+public slots:
     virtual void onItemDoubleClicked() = 0;
     virtual void textEdited() = 0;
     virtual void searchItem() = 0;
@@ -25,8 +25,6 @@ private slots:
 
 protected:
     Ui::SearchStruct *ui;
-
-    void bindSignalsAndSlots();
 
 private:
     virtual void fillListWidget() = 0;

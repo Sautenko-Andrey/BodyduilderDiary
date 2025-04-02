@@ -47,11 +47,15 @@ void MainWindow::on_actionAdd_user_triggered()
 */
 void MainWindow::on_actionFind_a_customer_triggered()
 {
-    m_ptr_find_user = std::make_unique<Find>(FindType::Customer, this);
+    // m_ptr_find_user = std::make_unique<Find>(FindType::Customer, this);
 
-    m_ptr_find_user->setWindowTitle("Searching a customer");
+    // m_ptr_find_user->setWindowTitle("Searching a customer");
 
-    m_ptr_find_user->show();
+    // m_ptr_find_user->show();
+
+    m_ptr_search_customer = std::make_unique<SearchCustomer>();
+    m_ptr_search_customer->setWindowTitle("Searching a customer");
+    m_ptr_search_customer->show();
 }
 
 

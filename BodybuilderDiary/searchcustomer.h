@@ -3,7 +3,7 @@
 #include "customer.h"
 
 class SearchCustomer final : public SearchStruct{
-
+    Q_OBJECT
 public:
 
     SearchCustomer();

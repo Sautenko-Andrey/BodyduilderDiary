@@ -10,6 +10,8 @@
 #include "deletecustomer.h"
 #include "addexercise.h"
 
+#include "searchcustomer.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -49,7 +51,10 @@ private:
     std::unique_ptr<AddUser> m_ptr_add_user{nullptr};
 
     // Pointer on FindCustomer widget
-    std::unique_ptr<Find> m_ptr_find_user{nullptr};
+    std::unique_ptr<Find> m_ptr_find_user{nullptr};  // Remove it!
+
+    // Pointer on SearchCustomer
+    std::unique_ptr<SearchCustomer> m_ptr_search_customer{nullptr};
 
     // Pointer on EditCustomer widget
     std::unique_ptr<EditCustomer> m_ptr_edit_user{nullptr};

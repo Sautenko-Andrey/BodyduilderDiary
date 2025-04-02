@@ -4,10 +4,40 @@
 #include <QMessageBox>
 
 
-SearchCustomer::SearchCustomer(){
+SearchCustomer::SearchCustomer(): SearchStruct(nullptr){
+
+    // Showing all customers in the block
+    DataBaseManager &ref_db_manager = DataBaseManager::getInstance();
+
+    //Read data from the database and save it into QMultiMap
+    bool res =
+        ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
+                                       m_data, Customer::getFieldsNum());
+
+    if(!res){
+        QMessageBox::warning(this, "Database error",
+                             "Couldn't read customers data");
+        return;
+    }
+
+
+    // Fill the list widget with customers names
+    fillListWidget();
 
     // Signals and slots
-    bindSignalsAndSlots();
+
+    connect(ui->InfoListWidget, &QListWidget::doubleClicked,
+            this, &SearchCustomer::onItemDoubleClicked);
+    connect(ui->searchLineEdit, &QLineEdit::textEdited,
+            this, &SearchCustomer::textEdited);
+    connect(ui->searchLineEdit, &QLineEdit::returnPressed,
+            this, &SearchCustomer::searchItem);
+
+    // Connect buttons as well
+    connect(ui->clearAllButton, &QPushButton::clicked,
+            this, &SearchCustomer::onClearAllButtonClicked);
+    connect(ui->showUsersListButton, &QPushButton::clicked,
+            this, &SearchCustomer::onShowItemsListButtonClicked);
 }
 
 
