@@ -80,6 +80,10 @@ const QString update_exerc_query = "UPDATE exercises "
                                    "description = :i_descr; ";
 
 
+// For deleting a customer
+const QString delete_user_query = "DELETE "
+                                  "FROM customers "
+                                  "WHERE full_name = :i_name";
 
 
 }// End CustomQuery namespace

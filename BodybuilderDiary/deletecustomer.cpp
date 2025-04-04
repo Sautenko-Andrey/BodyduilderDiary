@@ -35,8 +35,10 @@ DeleteCustomer::DeleteCustomer(QWidget *parent)
     // Get all customers names
     DataBaseManager &ref_db_manager = DataBaseManager::getInstance();
 
-    auto res = ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
-                                       m_data, Customer::getFieldsNum());
+    auto res =
+        ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
+                                       m_data,
+                                       Customer::getFieldsNum());
 
     if(!res){
         QMessageBox::warning(this, "Database error",
@@ -142,6 +144,9 @@ void DeleteCustomer::on_deleteButton_clicked()
         m_customers_names << (*it)->getName();
     }
 }
+
+
+
 
 void DeleteCustomer::enterPressed()
 {
