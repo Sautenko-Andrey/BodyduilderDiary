@@ -42,6 +42,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         searchstruct.h searchstruct.cpp searchstruct.ui
         searchcustomer.h searchcustomer.cpp
         searchexercise.h searchexercise.cpp
+        editexrcise.h editexrcise.cpp editexrcise.ui
 
     )
 # Define target properties for Android with Qt 6 as:

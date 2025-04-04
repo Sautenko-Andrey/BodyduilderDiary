@@ -1,42 +1,42 @@
-#ifndef FIND_H
-#define FIND_H
+// #ifndef FIND_H
+// #define FIND_H
 
-#include <QDialog>
-#include <QMap>
-#include "customer.h"
+// #include <QDialog>
+// #include <QMap>
+// #include "customer.h"
 
 
-namespace Ui {
-class FindCustomer;
-}
+// namespace Ui {
+// class FindCustomer;
+// }
 
-enum class FindType { Customer, Exercise };
+// enum class FindType { Customer, Exercise };
 
-class Find : public QDialog
-{
-    Q_OBJECT
+// class Find : public QDialog
+// {
+//     Q_OBJECT
 
-public:
-    Find(FindType find_type, QWidget *parent = nullptr);
-    ~Find();
+// public:
+//     Find(FindType find_type, QWidget *parent = nullptr);
+//     ~Find();
 
-private slots:
-    void onUserDoubleClicked();
+// private slots:
+//     void onUserDoubleClicked();
 
-    void textEdited();
+//     void textEdited();
 
-    void searchCustomer();
+//     void searchCustomer();
 
-    void on_clearAllButton_clicked();
+//     void on_clearAllButton_clicked();
 
-    void on_showUsersListButton_clicked();
+//     void on_showUsersListButton_clicked();
 
-private:
-    Ui::FindCustomer *ui;
+// private:
+//     Ui::FindCustomer *ui;
 
-    QMap<QString, std::shared_ptr<Customer>> m_data;
+//     QMap<QString, std::shared_ptr<Customer>> m_data;
 
-    void fillListWidget();
-};
+//     void fillListWidget();
+// };
 
-#endif // FIND_H
+// #endif // FIND_H

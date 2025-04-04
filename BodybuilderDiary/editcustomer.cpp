@@ -2,6 +2,7 @@
 #include "ui_editcustomer.h"
 #include "databasemanager.h"
 #include "query_messages.h"
+#include "utils.h"
 
 #include <QMessageBox>
 #include <QCompleter>
@@ -44,7 +45,7 @@ EditCustomer::EditCustomer(QWidget *parent)
     // Hide empty widgets
     hideDataWidgets();
 
-    // Get referenct on databse
+    // Get reference on the database
     auto &ref_db_manager = DataBaseManager::getInstance();
 
     // Read data from the database and save it into QMultiMap
@@ -99,18 +100,24 @@ void EditCustomer::searchCustomer()
     if(itr != m_data.end()){
         // Name found
         // Fill widgets with user's data
+
         // Name
         ui->fullNameLine->setText((*itr)->getName());
+
         // Age
         ui->ageSpinBox->setValue((*itr)->getAge());
+
         // Gender
         (*itr)->getGender() ?
             ui->maleRadioButton->setChecked(true) :
             ui->femaleRadioButton->setChecked(true);
+
         // Height
         ui->heightSpinBox->setValue((*itr)->getHeight());
+
         // Weight
         ui->weightSpinBox->setValue((*itr)->getWeight());
+
         // Notes
         ui->notesTextEdit->setText((*itr)->getNotice());
     }
@@ -124,20 +131,8 @@ void EditCustomer::searchCustomer()
 */
 void EditCustomer::textEdited()
 {
-    // Get all customers names
-
-    for(auto it = m_data.cbegin(); it != m_data.cend(); ++it){
-        m_customers_names << (*it)->getName();
-    }
-
-    QStringList names = QStringList(m_customers_names.begin(), m_customers_names.end());
-
-    // Set up QCompliter for auto completer(for user's conveniece)
-    QCompleter *completer = new QCompleter(names, this);
-
-    // Register independency
-    completer->setCaseSensitivity(Qt::CaseInsensitive);
-    ui->searchLine->setCompleter(completer);
+    // Call the tamplate function from Utils module.
+    Utils::textEdited(m_data, m_customers_names, ui->searchLine, this);
 }
 
 void EditCustomer::hideDataWidgets()
@@ -225,7 +220,8 @@ void EditCustomer::on_editButton_clicked()
 
     // Read data from the database and save it into QMultiMap
     auto update_res = ref_db_manager.readRequestToDB(CustomQuery::read_customers_query_all,
-                                              m_data, Customer::getFieldsNum());
+                                                    m_data,
+                                                     Customer::getFieldsNum());
 
     if(!update_res){
         QMessageBox::warning(this, "Database error",

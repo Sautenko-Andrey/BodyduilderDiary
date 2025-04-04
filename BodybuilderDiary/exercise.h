@@ -19,7 +19,7 @@ public:
 
     const QString& getTitle() const { return m_title; }
 
-    const QString& getName() const { return m_title; }  // !!!Dublication
+    const QString& getName() const { return getTitle(); }
 
     const QString getExerciseType();
 

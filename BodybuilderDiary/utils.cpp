@@ -36,5 +36,4 @@ bool checkUniqueText(const QString &text, const std::deque<QString> &data){
     return true;
 }
 
-
 }// End namespace Utils

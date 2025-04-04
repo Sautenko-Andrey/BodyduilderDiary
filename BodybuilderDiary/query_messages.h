@@ -72,6 +72,14 @@ const QString update_user_query = "UPDATE customers "
                                   "notes = :i_notes "
                                   "WHERE full_name = :i_full_name;";
 
+// For updating an exercise
+const QString update_exerc_query = "UPDATE exercises "
+                                   "SET "
+                                   "name = :i_new_name, "
+                                   "type = :i_type, "
+                                   "description = :i_descr; ";
+
+
 
 
 }// End CustomQuery namespace

@@ -97,7 +97,9 @@ void MainWindow::on_actionAdd_a_new_exercise_triggered()
 */
 void MainWindow::on_actionEdit_exercise_exercises_triggered()
 {
-
+    m_ptr_edit_exercise = std::make_unique<EditExrcise>(this);
+    m_ptr_edit_exercise->setWindowTitle("Edit an exercise");
+    m_ptr_edit_exercise->show();
 }
 
 

@@ -5,13 +5,13 @@
 
 #include "adduser.h"
 #include "databasemanager.h"
-#include "find.h"
+//#include "find.h"
 #include "editcustomer.h"
 #include "deletecustomer.h"
 #include "addexercise.h"
-
 #include "searchcustomer.h"
 #include "searchexercise.h"
+#include "editexrcise.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -70,7 +70,10 @@ private:
     std::unique_ptr<AddExercise> m_ptr_add_exercise{nullptr};
 
     // For seeking an exercise
-    std::unique_ptr<Find> m_ptr_find_exercise{nullptr};
+    //std::unique_ptr<Find> m_ptr_find_exercise{nullptr};
+
+    // Pointer in EditExercise widget
+    std::unique_ptr<EditExrcise> m_ptr_edit_exercise{nullptr};
 
     DataBaseManager &db_manager = DataBaseManager::getInstance();
 
