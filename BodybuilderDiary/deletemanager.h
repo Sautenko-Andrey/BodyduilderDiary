@@ -7,6 +7,7 @@
 #include <QMap>
 #include <concepts>
 #include "appstruct.h"
+#include <QMessageBox>
 
 
 enum class Size{
@@ -27,8 +28,6 @@ public:
                     const QString &name)
     {
 
-        if(object == nullptr) return false;
-
         // Make a delete query to DB
         DataBaseManager &ref_db_manager = DataBaseManager::getInstance();
 
@@ -43,11 +42,11 @@ public:
 
     //============================================================
 
-    void toHiddenMode(QObject *object,
+    void toHiddenMode(QWidget *widget,
                       QPlainTextEdit *plain_text_edit,
                       QLineEdit *search_line)
     {
-        if(object == nullptr ||
+        if(widget == nullptr ||
            plain_text_edit == nullptr ||
            search_line == nullptr)
         {
@@ -55,7 +54,7 @@ public:
         }
 
         // Make size for hide mode
-        object->resize(
+        widget->resize(
             static_cast<int>(Size::WidgetWidth),
             static_cast<int>(Size::HideModeHeight)
             );
@@ -77,6 +76,8 @@ public:
         data.clear();
 
         // Read data from the database and save it into QMultiMap
+        DataBaseManager &ref_db_manager = DataBaseManager::getInstance();
+
         bool update_res =
             ref_db_manager.readRequestToDB(read_query, data, fields_num);
 
@@ -86,6 +87,49 @@ public:
 
         for(auto it = data.cbegin(); it != data.cend(); ++it){
             all_names << (*it)->getName();
+        }
+    }
+
+
+    //=============================================================
+
+    template<AppStructDerived T>
+    void prepareEnterExecution(QLineEdit *search_line,
+                               QWidget *widget,
+                               QPlainTextEdit *plain_text_edit,
+                               QString &name,
+                               const QMap<QString, std::shared_ptr<T>> &data)
+    {
+
+        // If search line is empty ignore command
+        if(search_line == nullptr ||
+           widget == nullptr ||
+           search_line->text().isEmpty())
+        {
+            return;
+        }
+
+
+        // Make size for regular mode
+        widget->resize(
+                static_cast<int>(Size::WidgetWidth),
+                static_cast<int>(Size::RegularModeHeight)
+        );
+
+        // Show text plain edit again
+        plain_text_edit->show();
+
+        // Get name from QLinedEdit
+        name = search_line->text();
+
+        // Find this user and get its data
+        auto res = data.find(name);
+
+        if(res == data.end()){
+            QMessageBox::warning(widget,
+                                 "Report",
+                                 "The desired data doesn't exist");
+            return;
         }
     }
 
